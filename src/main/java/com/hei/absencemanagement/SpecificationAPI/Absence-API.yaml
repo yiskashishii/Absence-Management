@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  title: Absence Management API
+  description: API for managing absences in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /absences:
+    get:
+      summary: Get all absences
+      operationId: getAllAbsences
+      tags:
+        - Absences
+      responses:
+        '200':
+          description: List of all absences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Absence'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new absence
+      operationId: createAbsence
+      tags:
+        - Absences
+      requestBody:
+        description: Absence object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Absence'
+      responses:
+        '200':
+          description: Absence created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /absences/{id}:
+    get:
+      summary: Get absence by ID
+      operationId: getAbsenceById
+      tags:
+        - Absences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Absence found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Absence'
+        '404':
+          description: Absence not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update an absence by ID
+      operationId: updateAbsence
+      tags:
+        - Absences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Absence object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Absence'
+      responses:
+        '200':
+          description: Absence updated successfully
+        '404':
+          description: Absence not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete an absence by ID
+      operationId: deleteAbsence
+      tags:
+        - Absences
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Absence deleted successfully
+        '404':
+          description: Absence not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Absence:
+      type: object
+      properties:
+        idAbsence:
+          type: integer
+          description: ID of the absence
+        studentId:
+          type: integer
+          description: ID of the student
+        courseId:
+          type: integer
+          description: ID of the course
+        date:
+          type: string
+          format: date-time
+          description: Date of the absence
+        reason:
+          type: string
+          description: Reason for the absence
+

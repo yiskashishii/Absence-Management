@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Utilisateur Management API
+  description: API for managing Utilisateurs in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /utilisateurs:
+    get:
+      summary: Get all Utilisateurs
+      operationId: getAllUtilisateurs
+      tags:
+        - Utilisateur
+      responses:
+        '200':
+          description: List of all Utilisateurs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Utilisateurs'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new Utilisateur
+      operationId: createUtilisateur
+      tags:
+        - Utilisateur
+      requestBody:
+        description: Utilisateur object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Utilisateurs'
+      responses:
+        '201':
+          description: Utilisateur created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /utilisateurs/{id}:
+    get:
+      summary: Get Utilisateur by ID
+      operationId: getUtilisateurById
+      tags:
+        - Utilisateur
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Utilisateur found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Utilisateurs'
+        '404':
+          description: Utilisateur not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update a Utilisateur by ID
+      operationId: updateUtilisateur
+      tags:
+        - Utilisateur
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Utilisateur object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Utilisateurs'
+      responses:
+        '204':
+          description: Utilisateur updated successfully
+        '404':
+          description: Utilisateur not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete a Utilisateur by ID
+      operationId: deleteUtilisateur
+      tags:
+        - Utilisateur
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Utilisateur deleted successfully
+        '404':
+          description: Utilisateur not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Utilisateurs:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the Utilisateur
+        username:
+          type: string
+          description: Username of the Utilisateur
+        password:
+          type: string
+          description: Password of the Utilisateur
+        email:
+          type: string
+          description: Email address of the Utilisateur
+        role:
+          type: string
+          description: Role of the Utilisateur

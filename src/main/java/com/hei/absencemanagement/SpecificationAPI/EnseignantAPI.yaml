@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: Enseignant Management API
+  description: API for managing Enseignants in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /enseignants:
+    get:
+      summary: Get all Enseignants
+      operationId: getAllEnseignants
+      tags:
+        - Enseignant
+      responses:
+        '200':
+          description: List of all Enseignants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Enseignant'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new Enseignant
+      operationId: createEnseignant
+      tags:
+        - Enseignant
+      requestBody:
+        description: Enseignant object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Enseignant'
+      responses:
+        '200':
+          description: Enseignant created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /enseignants/{id}:
+    get:
+      summary: Get Enseignant by ID
+      operationId: getEnseignantById
+      tags:
+        - Enseignant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Enseignant found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enseignant'
+        '404':
+          description: Enseignant not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update an Enseignant by ID
+      operationId: updateEnseignant
+      tags:
+        - Enseignant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Enseignant object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Enseignant'
+      responses:
+        '200':
+          description: Enseignant updated successfully
+        '404':
+          description: Enseignant not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete an Enseignant by ID
+      operationId: deleteEnseignant
+      tags:
+        - Enseignant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Enseignant deleted successfully
+        '404':
+          description: Enseignant not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Enseignant:
+      type: object
+      properties:
+        idEnseignant:
+          type: integer
+          description: ID of the Enseignant
+        firstName:
+          type: string
+          description: First name of the Enseignant
+        lastName:
+          type: string
+          description: Last name of the Enseignant
+        email:
+          type: string
+          description: Email address of the Enseignant
+        department:
+          type: string
+          description: Department the Enseignant belongs to
+        hireDate:
+          type: string
+          format: date
+          description: Hire date of the Enseignant

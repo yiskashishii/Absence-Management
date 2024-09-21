@@ -1,0 +1,83 @@
+drop database absence_hei if exists
+
+create database absence_hei
+
+\c absence_hei
+
+
+CREATE TABLE Utilisateurs (
+                              id SERIAL PRIMARY KEY,
+                              nom VARCHAR(255),
+                              prenom VARCHAR(255),
+                              email VARCHAR(255) UNIQUE,
+                              mot_de_passe VARCHAR(255)
+);
+
+CREATE TABLE Enseignant (
+                            id_enseignant SERIAL PRIMARY KEY,
+                            matiere VARCHAR(255),
+                            utilisateur_id INT REFERENCES Utilisateurs(id)
+);
+
+CREATE TABLE Responsable (
+                             id_responsable SERIAL PRIMARY KEY,
+                             utilisateur_id INT REFERENCES Utilisateurs(id)
+);
+
+CREATE TABLE Etudiants (
+                           id_etudiant varchar(8) PRIMARY KEY,
+                           nom VARCHAR(255),
+                           prenom VARCHAR(255),
+                           date_naissance DATE,
+                           email VARCHAR(255)
+);
+
+CREATE TABLE Cours (
+                       id_cours SERIAL PRIMARY KEY,
+                       nom_cours VARCHAR(255),
+                       description TEXT,
+                       enseignant_id INT REFERENCES Enseignant(id_enseignant)
+);
+
+
+CREATE TABLE COR (
+                     id SERIAL PRIMARY KEY,
+                     etudiant_id varchar(8) REFERENCES Etudiants(id_etudiant)
+);
+
+CREATE TABLE Absence (
+                         id_absence SERIAL PRIMARY KEY,
+                         date_absence DATE,
+                         etudiant_id varchar(8) REFERENCES Etudiants(id_etudiant),
+                         cours_id INT REFERENCES Cours(id_cours),
+                         justification TEXT
+);
+
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe) VALUES ('Dupont', 'Jean', 'jean.dupont@example.com', 'password123');
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe) VALUES ('Martin', 'Sophie', 'sophie.martin@example.com', 'securepass456');
+INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe) VALUES ('Bernard', 'Luc', 'luc.bernard@example.com', 'mypassword789');
+
+INSERT INTO Enseignant (matiere, utilisateur_id) VALUES ('Mathematiques', 1);
+INSERT INTO Enseignant (matiere, utilisateur_id) VALUES ('Physique', 2);
+INSERT INTO Enseignant (matiere, utilisateur_id) VALUES ('Informatique', 3);
+
+INSERT INTO Responsable (utilisateur_id) VALUES (1);
+INSERT INTO Responsable (utilisateur_id) VALUES (2);
+INSERT INTO Responsable (utilisateur_id) VALUES (3);
+
+INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES ('E001', 'Durand', 'Claire', '1998-05-12', 'claire.durand@example.com');
+INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES ('E002', 'Lefevre', 'Paul', '1997-10-03', 'paul.lefevre@example.com');
+INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES ('E003', 'Moreau', 'Marie', '1999-02-20', 'marie.moreau@example.com');
+
+INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES ('Algebra', 'Introduction to Algebra', 1);
+INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES ('Mécanique', 'Basics of Mechanics', 2);
+INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES ('Programmation', 'Fundamentals of Programming', 3);
+
+INSERT INTO COR (etudiant_id) VALUES ('E001');
+INSERT INTO COR (etudiant_id) VALUES ('E002');
+INSERT INTO COR (etudiant_id) VALUES ('E003');
+
+INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-15', 'E001', 1, 'Maladie');
+INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-20', 'E002', 2, 'Rendez-vous');
+INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-22', 'E003', 3, 'Vacances');
+

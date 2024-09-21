@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: Etudiant Management API
+  description: API for managing Etudiants in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /etudiants:
+    get:
+      summary: Get all Etudiants
+      operationId: getAllEtudiants
+      tags:
+        - Etudiant
+      responses:
+        '200':
+          description: List of all Etudiants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Etudiant'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new Etudiant
+      operationId: createEtudiant
+      tags:
+        - Etudiant
+      requestBody:
+        description: Etudiant object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Etudiant'
+      responses:
+        '200':
+          description: Etudiant created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /etudiants/{id}:
+    get:
+      summary: Get Etudiant by ID
+      operationId: getEtudiantById
+      tags:
+        - Etudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Etudiant found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Etudiant'
+        '404':
+          description: Etudiant not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update an Etudiant by ID
+      operationId: updateEtudiant
+      tags:
+        - Etudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Etudiant object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Etudiant'
+      responses:
+        '200':
+          description: Etudiant updated successfully
+        '404':
+          description: Etudiant not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete an Etudiant by ID
+      operationId: deleteEtudiant
+      tags:
+        - Etudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Etudiant deleted successfully
+        '404':
+          description: Etudiant not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Etudiant:
+      type: object
+      properties:
+        idEtudiant:
+          type: string
+          description: ID of the Etudiant
+        firstName:
+          type: string
+          description: First name of the Etudiant
+        lastName:
+          type: string
+          description: Last name of the Etudiant
+        email:
+          type: string
+          description: Email address of the Etudiant
+        department:
+          type: string
+          description: Department the Etudiant belongs to
+        birthDate:
+          type: string
+          format: date
+          description: Birth date of the Etudiant

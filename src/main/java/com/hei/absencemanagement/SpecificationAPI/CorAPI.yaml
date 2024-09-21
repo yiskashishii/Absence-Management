@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: COR Management API
+  description: API for managing CORs in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /cor:
+    get:
+      summary: Get all CORs
+      operationId: getAllCOR
+      tags:
+        - COR
+      responses:
+        '200':
+          description: List of all CORs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/COR'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new COR
+      operationId: createCOR
+      tags:
+        - COR
+      requestBody:
+        description: COR object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/COR'
+      responses:
+        '200':
+          description: COR created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /cor/{id}:
+    get:
+      summary: Get COR by ID
+      operationId: getCORById
+      tags:
+        - COR
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: COR found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/COR'
+        '404':
+          description: COR not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update a COR by ID
+      operationId: updateCOR
+      tags:
+        - COR
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: COR object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/COR'
+      responses:
+        '200':
+          description: COR updated successfully
+        '404':
+          description: COR not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete a COR by ID
+      operationId: deleteCOR
+      tags:
+        - COR
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: COR deleted successfully
+        '404':
+          description: COR not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    COR:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the COR
+        name:
+          type: string
+          description: Name of the COR
+        email:
+          type: string
+          description: Email of the COR
+        phoneNumber:
+          type: string
+          description: Phone number of the COR

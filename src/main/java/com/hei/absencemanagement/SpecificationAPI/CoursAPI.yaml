@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  title: Cours Management API
+  description: API for managing Cours in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /cours:
+    get:
+      summary: Get all Cours
+      operationId: getAllCours
+      tags:
+        - Cours
+      responses:
+        '200':
+          description: List of all Cours
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cours'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new Cours
+      operationId: createCours
+      tags:
+        - Cours
+      requestBody:
+        description: Cours object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cours'
+      responses:
+        '200':
+          description: Cours created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /cours/{id}:
+    get:
+      summary: Get Cours by ID
+      operationId: getCoursById
+      tags:
+        - Cours
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cours found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cours'
+        '404':
+          description: Cours not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update a Cours by ID
+      operationId: updateCours
+      tags:
+        - Cours
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Cours object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cours'
+      responses:
+        '200':
+          description: Cours updated successfully
+        '404':
+          description: Cours not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete a Cours by ID
+      operationId: deleteCours
+      tags:
+        - Cours
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cours deleted successfully
+        '404':
+          description: Cours not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Cours:
+      type: object
+      properties:
+        idCours:
+          type: integer
+          description: ID of the Cours
+        title:
+          type: string
+          description: Title of the Cours
+        description:
+          type: string
+          description: Description of the Cours
+        credits:
+          type: integer
+          description: Number of credits for the Cours
+        startDate:
+          type: string
+          format: date
+          description: Start date of the Cours
+        endDate:
+          type: string
+          format: date
+          description: End date of the Cours

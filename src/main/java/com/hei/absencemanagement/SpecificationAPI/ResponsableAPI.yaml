@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Responsable Management API
+  description: API for managing Responsables in the system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+
+paths:
+  /responsables:
+    get:
+      summary: Get all Responsables
+      operationId: getAllResponsables
+      tags:
+        - Responsable
+      responses:
+        '200':
+          description: List of all Responsables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Responsable'
+        '500':
+          description: Server error
+
+    post:
+      summary: Create a new Responsable
+      operationId: createResponsable
+      tags:
+        - Responsable
+      requestBody:
+        description: Responsable object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Responsable'
+      responses:
+        '200':
+          description: Responsable created successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /responsables/{id}:
+    get:
+      summary: Get Responsable by ID
+      operationId: getResponsableById
+      tags:
+        - Responsable
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Responsable found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Responsable'
+        '404':
+          description: Responsable not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update a Responsable by ID
+      operationId: updateResponsable
+      tags:
+        - Responsable
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Responsable object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Responsable'
+      responses:
+        '200':
+          description: Responsable updated successfully
+        '404':
+          description: Responsable not found
+        '500':
+          description: Server error
+
+    delete:
+      summary: Delete a Responsable by ID
+      operationId: deleteResponsable
+      tags:
+        - Responsable
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Responsable deleted successfully
+        '404':
+          description: Responsable not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Responsable:
+      type: object
+      properties:
+        idResponsable:
+          type: integer
+          description: ID of the Responsable
+        firstName:
+          type: string
+          description: First name of the Responsable
+        lastName:
+          type: string
+          description: Last name of the Responsable
+        email:
+          type: string
+          description: Email address of the Responsable
+        role:
+          type: string
+          description: Role of the Responsable
