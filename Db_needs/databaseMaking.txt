@@ -53,31 +53,80 @@ CREATE TABLE Absence (
                          justification TEXT
 );
 
-INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe) VALUES ('Dupont', 'Jean', 'jean.dupont@example.com', 'password123');
-INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe) VALUES ('Martin', 'Sophie', 'sophie.martin@example.com', 'securepass456');
-INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe) VALUES ('Bernard', 'Luc', 'luc.bernard@example.com', 'mypassword789');
+INSERT INTO Utilisateurs (id, nom, prenom, email, mot_de_passe) VALUES
+(25, 'NJARAMALALA', 'Niavo Tsihoarana Adriano', 'hei.niavo', 'password123'),
+(26, 'MAHERINIAINA', 'Harentsoa Sarobidy', 'hei.harentsoa', 'password123'),
+(27, 'RAZAKARIMAMY', 'Miranto Jonathan', 'hei.miranto', 'password123'),
+(28, 'RAZAFINDRATELO', 'Abegà', 'hei.abega', 'password123'),
+(29, 'RAHARIMBOAVONJY', 'Ny Antsaniaina Fanomezantsoa', 'hei.nyantsaniaina', 'password123'),
+(30, 'ANDRIANONY', 'Mamy Képhas', 'hei.mamy', 'password123'),
+(31, 'TIANDRAINY', 'Fréderico', 'hei.frederico', 'password123'),
+(32, 'RANDRIANIRINA', 'Nomena Fitahina Fandresena', 'hei.nomena', 'password123'),
+(33, 'ANDRIAMAHAFALY', 'Arena Mendrika Christinah', 'hei.arena', 'password123'),
+(34, 'RAKOTOARIVONY', 'Onja Philippa', 'hei.onja', 'password123'),
+(35, 'RAZAFINDRATANDRA', 'Fanasina Iarizo', 'hei.fanasina', 'password123'),
 
-INSERT INTO Enseignant (matiere, utilisateur_id) VALUES ('Mathematiques', 1);
-INSERT INTO Enseignant (matiere, utilisateur_id) VALUES ('Physique', 2);
-INSERT INTO Enseignant (matiere, utilisateur_id) VALUES ('Informatique', 3);
+INSERT INTO Enseignant (matiere, utilisateur_id) VALUES
+('PROG1', 1),
+('WEB1', 2),
+('DONNEES1', 3),
+('THEORIE1', 4),
+('MGT1', 5),
+('LV1', 6),
+('SYS1', 7),
+('SYS2', 8),
+('WEB2', 9),
+('PROG2', 10),
+('API', 11),
 
 INSERT INTO Responsable (utilisateur_id) VALUES (1);
 INSERT INTO Responsable (utilisateur_id) VALUES (2);
 INSERT INTO Responsable (utilisateur_id) VALUES (3);
 
-INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES ('E001', 'Durand', 'Claire', '1998-05-12', 'claire.durand@example.com');
-INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES ('E002', 'Lefevre', 'Paul', '1997-10-03', 'paul.lefevre@example.com');
-INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES ('E003', 'Moreau', 'Marie', '1999-02-20', 'marie.moreau@example.com');
+INSERT INTO Etudiants (id_etudiant, nom, prenom, date_naissance, email) VALUES
+('STD22121', 'RANDRIAMANANTENA', 'Mendrika Ny Harentsoa Tafita', '2005-07-14', 'hei.mendrikanyharentsoatafita@hei.com'),
+('STD22122', 'RAJAONARILALA', 'Amboaranajoro Eddie Michaël', '2004-03-25', 'hei.amboaranajoroeddiemichael@hei.com'),
+('STD23001', 'RAMISARIJAONA-RAMAROMANGA', 'Joïce Stellio', '2006-11-12', 'hei.joicestellio@hei.com'),
+('STD23002', 'RABEMANANTSOA', 'Andraina Andriamaro', '2003-09-02', 'hei.andrainaandriamaro@hei.com'),
+('STD23004', 'TOTOZAFY', 'Johnathon Wesley', '2007-02-19', 'hei.johnathonwesley@hei.com'),
+('STD23006', 'ANDRIAMANDRESY', 'Kenny Unity', '2006-10-21', 'hei.kennyunity@hei.com'),
+('STD23007', 'RAMANANTOANINA', 'Kantoniavo Thierry', '2004-12-30', 'hei.kantonivothierry@hei.com'),
+('STD23008', 'RASANDIFERA', 'Jaonarison Nomenjanahary Fandresena', '2005-01-15', 'hei.jaonarisonnomenjanaharyfandresena@hei.com'),
+('STD23009', 'ANDRIATSIFERANTSOA', 'Elitina', '2003-05-04', 'hei.elitina@hei.com'),
+('STD23010', 'RANAIVOSOA', 'Angolatiana Nirina', '2005-08-08', 'hei.angolatiananirina@hei.com'),
+('STD23011', 'RAHARISON', 'Rajoharitiana Ainasoa', '2007-03-20', 'hei.rajoharitianaainasoa@hei.com'),
+('STD23012', 'RAKOTONIRINA', 'Miharisoa', '2004-06-13', 'hei.miharisoa@hei.com'),
+('STD23013', 'RAVELONIRINA', 'Minosoa', '2006-09-09', 'hei.minosoa@hei.com'),
+('STD23014', 'RAKOTOMALALA', 'Taratra Fanoitra', '2003-04-05', 'hei.taratrafanoitra@hei.com'),
+('STD23015', 'MIHAGO NY MENDRIKA', 'Tohiaina', '2006-11-24', 'hei.tohiaina@hei.com'),
+('STD23016', 'RATOVONANAHARY', 'Liantsoa', '2005-10-01', 'hei.liantsoa@hei.com'),
+('STD23017', 'RAKOTONDRASOA', 'Tojo Nandrianina', '2007-07-23', 'hei.tojonandrianina@hei.com'),
+('STD23018', 'ANDRIANJOHANINTSEHENO', 'Nomena Harilala', '2006-12-02', 'hei.nomenaharilala@hei.com'),
+('STD23020', 'FETRARISON', 'Eric', '2004-02-16', 'hei.eric@hei.com'),
+('STD23021', 'HERY NY AINA', 'Mandimbisoa Randy', '2003-10-30', 'hei.mandimbisoarandy@hei.com'),
+('STD23022', 'TEHINIAVO', 'Daniel Langio Phylosius', '2005-09-11', 'hei.daniellangiophylosius@hei.com'),
+('STD23023', 'IFALIANTSOA', 'Shearia Yiska Fankasitrahana', '2004-07-08', 'hei.sheariayiskafankasitrahana@hei.com'),
+('STD23024', 'HARILANDY', 'Fedora Anjaralalaina', '2006-03-29', 'hei.fedoraanjaralalaina@hei.com'),
+('STD23025', 'NJARAMALALA', 'Niavo Tsihoarana Adriano', '2005-04-18', 'hei.niavotsihoaranaadriano@hei.com');
 
-INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES ('Algebra', 'Introduction to Algebra', 1);
-INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES ('Mécanique', 'Basics of Mechanics', 2);
-INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES ('Programmation', 'Fundamentals of Programming', 3);
+INSERT INTO Cours (nom_cours, description, enseignant_id) VALUES
+('PROG1', 'Cours de programmation de niveau 1', 1),
+('WEB1', 'Introduction aux concepts de développement web', 2),
+('DONNEES1', 'Cours sur les bases de données et la gestion des données', 3),
+('THEORIE1', 'Théories de l'informatique et de la technologie', 4),
+('MGT1', 'Introduction au management et à la gestion', 5),
+('LV1', 'Langues vivantes 1', 6),
+('SYS1', 'Systèmes d'exploitation - Niveau 1', 7),
+('SYS2', 'Systèmes d'exploitation - Niveau 2', 8),
+('WEB2', 'Développement web avancé', 9),
+('PROG2', 'Programmation - Niveau avancé', 10),
+('API', 'Conception et utilisation des API', 11),
 
-INSERT INTO COR (etudiant_id) VALUES ('E001');
-INSERT INTO COR (etudiant_id) VALUES ('E002');
-INSERT INTO COR (etudiant_id) VALUES ('E003');
+INSERT INTO COR (etudiant_id) VALUES ('STD23006');
+INSERT INTO COR (etudiant_id) VALUES ('STD23012');
+INSERT INTO COR (etudiant_id) VALUES ('STD23010');
 
-INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-15', 'E001', 1, 'Maladie');
-INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-20', 'E002', 2, 'Rendez-vous');
-INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-22', 'E003', 3, 'Vacances');
+INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-15', 'STD22121', 1, 'Maladie');
+INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-20', 'STD23002', 2, 'Rendez-vous');
+INSERT INTO Absence (date_absence, etudiant_id, cours_id, justification) VALUES ('2024-01-22', 'STD23010', 3, 'Vacances');
 
