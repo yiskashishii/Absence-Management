@@ -1,6 +1,6 @@
 drop database absence_hei if exists
 
-create database absence_hei
+create database absence_hei;
 
 \c absence_hei
 
